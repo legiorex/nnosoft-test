@@ -1,0 +1,1 @@
+export { getArtists } from './getArtists';

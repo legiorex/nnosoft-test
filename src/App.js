@@ -1,15 +1,18 @@
+// Core
 import React, { Component } from "react";
 import { Switch, Route } from "react-router";
 import { Provider } from "react-redux";
 import { HashRouter } from "react-router-dom";
 import configureStore from "./redux/store/configureStore";
 
+// Components
 import HomePage from "./components/Pages/Home";
 import ArtistsPage from "./components/Pages/Artists";
 import ArtworksPage from "./components/Pages/Artworks";
 import NotesPage from "./components/Pages/Notes";
 
-const store = configureStore();
+import { store } from './init/store';
+
 
 class App extends Component {
     render () {
