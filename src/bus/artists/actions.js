@@ -6,9 +6,9 @@ export const artistsActions = {
 
     // Sync
 
-    fillPosts: (artists) => {
+    fillArtists: (artists) => {
         return {
-            type:    types.FILL_POSTS,
+            type:    types.FILL_ARTISTS,
             payload: artists,
         };
     },

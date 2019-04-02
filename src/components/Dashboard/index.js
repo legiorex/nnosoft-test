@@ -7,6 +7,7 @@ import styles from "./styles.module.css";
 class Dashboard extends React.Component {
     renderArtistList () {
         return this.props.artists.map((artist) => (
+
             <NavLink
                 activeClassName = { styles['active-artist-row'] }
                 className = { styles['artist-row'] }
@@ -15,7 +16,7 @@ class Dashboard extends React.Component {
                 <div
                     className = { styles['artist-avatar'] }
                     style = { {
-                        backgroundImage: `url(/imgs/artists/${artist._id}.png)`,
+                        backgroundImage: `url(${artist.photo})`,
                     } }
                 />
                 <span>{`${artist.firstName} ${artist.lastName}`}</span>
@@ -30,20 +31,23 @@ class Dashboard extends React.Component {
         if (!selectedArtistId) {
             return null;
         }
+
         const artistInSpotlight = props.artists.find(
             (artist) => artist._id === selectedArtistId
         );
-        const label = `${artistInSpotlight.firstName} ${
-            artistInSpotlight.lastName
-        }`;
-        const imgUrl = `imgs/artists/${artistInSpotlight._id}.png`;
+
+        if (!artistInSpotlight) {
+            return null;
+        }
+
+        const label = `${artistInSpotlight.firstName} ${artistInSpotlight.lastName}`;
 
         return (
             <div className = { styles.spotlight }>
                 <div
                     className = { styles['spotlight-img'] }
                     style = { {
-                        backgroundImage: `url(${imgUrl})`,
+                        backgroundImage: `url(${artistInSpotlight.photo})`,
                     } }
                 />
                 <div className = { styles['spotlight-label'] }>{label}</div>
