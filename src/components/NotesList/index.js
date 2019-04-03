@@ -1,15 +1,50 @@
-import React from "react";
+// Core
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addNote } from "../../redux/actions/notes";
+import { bindActionCreators } from "redux";
 
 import styles from "./styles.module.css";
 
-const enhance = connect(
-    ({ notes }) => ({ notes }),
-    { addNote }
-);
+// Actions
+import { notesActions } from '../../bus/notes/actions';
 
-class NotesList extends React.Component {
+const mapStateToProps = (state) => {
+
+    return {
+        notes: state.notes,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+
+    return {
+        actions: bindActionCreators(
+            { ...notesActions },
+            dispatch
+        ),
+    };
+
+};
+
+@connect(mapStateToProps, mapDispatchToProps)
+
+class NotesList extends Component {
+
+    componentDidMount = () => {
+        const localNotes = JSON.parse(localStorage.getItem('notes'));
+
+        if (localNotes) {
+            this.props.actions.sendNotes(localNotes);
+        }
+
+        return null;
+    }
+
+    componentDidUpdate = () => {
+
+        this.props.actions.writeNotesLocal();
+
+    };
   renderNote = (note) => <div className = { styles["note-list-item"] }>{note}</div>;
 
   renderAddButton = (index = 0) => (
@@ -22,12 +57,21 @@ class NotesList extends React.Component {
   );
 
   onAddButtonClick = (e) => {
+
+      // eslint-disable-next-line no-alert
       const text = window.prompt("Note text:");
 
-      this.props.addNote(text, e.target.dataset.index);
+      if (!text) {
+          return null;
+      }
+
+      const indexNote = e.target.dataset.index;
+
+      this.props.actions.addNote({ text, indexNote });
   };
 
   render () {
+
       if (!this.props.notes.length) {
           return this.renderAddButton();
       }
@@ -48,4 +92,4 @@ class NotesList extends React.Component {
 
 }
 
-export default enhance(NotesList);
+export default NotesList;

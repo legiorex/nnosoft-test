@@ -1,12 +1,12 @@
-// Types
+// Components
 import { types } from "./types";
 
 const initialState = [];
 
-export const artistsReducer = (state = initialState, action) => {
+export const artworksReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case types.FILL_ARTISTS:
+        case types.FILL_ARTWORKS:
             return action.payload;
 
         default:

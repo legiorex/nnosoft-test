@@ -1,19 +1,46 @@
-import React from "react";
+// Core
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
+// Components
 import NavBar from "../../NavBar";
+import Dashboard from "../../Dashboard";
 
-// consider this data arrived from the API
-// <donotmodify>
-const artworks = [
-    { _id: "1", title: "In the event of sinking" },
-    { _id: "2", title: "Refugees in a nutshell" },
-    { _id: "3", title: "Solidarity" },
-    { _id: "4", title: "The rehearsal" }
-];
-// </donotmodify>
+// Actions
+import { artworksActions } from '../../../bus/artworks/actions';
 
-export default (props) => (
-    <div>
-        <NavBar />
-    </div>
-);
+const mapStateToProps = (state) => {
+
+    return {
+        artworks: state.artworks,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+
+    return {
+        actions: bindActionCreators(
+            { ...artworksActions },
+            dispatch
+        ),
+    };
+
+};
+
+@connect(mapStateToProps, mapDispatchToProps)
+
+class Artworks extends Component {
+    componentDidMount = () => {
+        this.props.actions.fetchArtworks();
+    }
+    render () {
+        return (
+            <div>
+                <NavBar />
+                <Dashboard arts = { this.props.artworks } subject = { 'artworks' } />
+            </div>
+        );
+    }
+}
+export default Artworks;

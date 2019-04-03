@@ -1,0 +1,1 @@
+export { notesLocal } from './notesLocal';

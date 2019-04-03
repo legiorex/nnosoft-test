@@ -1,46 +1,51 @@
+// Core
 import React from "react";
 import { withRouter } from "react-router";
 import { NavLink } from 'react-router-dom';
+
+// Components
+import Title from '../Title';
 
 import styles from "./styles.module.css";
 
 class Dashboard extends React.Component {
     renderArtistList () {
-        return this.props.artists.map((artist) => (
+        const { subject } = this.props;
+
+        return this.props.arts.map((item) => (
 
             <NavLink
                 activeClassName = { styles['active-artist-row'] }
                 className = { styles['artist-row'] }
-                key = { artist._id }
-                to = { `/artists/${artist._id}` }>
+                key = { item._id }
+                to = { `/${subject}/${item._id}` }>
                 <div
                     className = { styles['artist-avatar'] }
                     style = { {
-                        backgroundImage: `url(${artist.photo})`,
+                        backgroundImage: `url(${item.photo})`,
                     } }
                 />
-                <span>{`${artist.firstName} ${artist.lastName}`}</span>
+                <Title title = { item.title ? item.title : `${item.firstName} ${item.lastName}` } />
+
             </NavLink>
         ));
     }
 
     renderSpotLight () {
         const props = this.props;
-        const selectedArtistId = props.match.params && props.match.params.artistId;
+        const selectedArtistId = props.match.params && props.match.params.artId;
 
         if (!selectedArtistId) {
             return null;
         }
 
-        const artistInSpotlight = props.artists.find(
-            (artist) => artist._id === selectedArtistId
+        const artistInSpotlight = props.arts.find(
+            (art) => art._id === selectedArtistId
         );
 
         if (!artistInSpotlight) {
             return null;
         }
-
-        const label = `${artistInSpotlight.firstName} ${artistInSpotlight.lastName}`;
 
         return (
             <div className = { styles.spotlight }>
@@ -50,15 +55,21 @@ class Dashboard extends React.Component {
                         backgroundImage: `url(${artistInSpotlight.photo})`,
                     } }
                 />
-                <div className = { styles['spotlight-label'] }>{label}</div>
+                <div className = { styles['spotlight-label'] }>
+                    { artistInSpotlight.title ?
+                        artistInSpotlight.title :
+                        `${artistInSpotlight.firstName} ${artistInSpotlight.lastName}` }
+                </div>
             </div>
         );
     }
     render () {
+        const { subject } = this.props;
+
         return (
             <div className = { styles.dashboard }>
                 <div>
-                    <h3 className = { styles.header }>Artists</h3>
+                    <h3 className = { styles.header }>{subject.charAt(0).toUpperCase() + subject.slice(1)}</h3>
                     {this.renderArtistList()}
                 </div>
                 {this.renderSpotLight()}

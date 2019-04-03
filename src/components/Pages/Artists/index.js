@@ -40,7 +40,7 @@ class Artists extends Component {
         return (
             <div>
                 <NavBar />
-                <Dashboard artists = { this.props.artists } />
+                <Dashboard arts = { this.props.artists } subject = { 'artists' } />
             </div>
         );
     }
