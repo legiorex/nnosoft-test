@@ -7,7 +7,6 @@
     "@svgr/webpack": "2.4.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",
-    "babel-jest": "23.6.0",
     "babel-loader": "8.0.4",
     "babel-plugin-named-asset-import": "^0.3.0",
     "babel-preset-react-app": "^7.0.0",
@@ -48,7 +47,7 @@
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
-    "redux-saga": "^1.0.1",
+    "redux-saga": "~0.16.0",
     "resolve": "1.8.1",
     "sass-loader": "7.1.0",
     "style-loader": "0.23.0",
@@ -86,21 +85,28 @@
     "@babel/preset-env": "^7.4.2",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.4.0",
+    "babel-jest": "^23.6.0",
+    "babel-plugin-syntax-async-functions": "^6.13.0",
+    "babel-preset-es2017": "^6.24.1",
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-prettier": "^3.0.1",
     "immutable": "^4.0.0-rc.12",
     "prettier": "^1.16.4",
     "react-hot-loader": "^4.8.2",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "redux-saga-test-plan": "^3.7.0"
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!src/**/*.d.ts"
+      "<rootDir>/src/init/store.js",
+      "<rootDir>/src/bus/artists/**/*.{js,jsx}",
+      "<rootDir>/src/bus/artworks/**/*.{js,jsx}",
+      "<rootDir>/src/bus/notes/**/*.{js,jsx}"
     ],
     "resolver": "jest-pnp-resolver",
     "setupFiles": [
-      "react-app-polyfill/jsdom"
+      "react-app-polyfill/jsdom",
+      "<rootDir>/config/jest/scripts/setupFiles.js"
     ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",

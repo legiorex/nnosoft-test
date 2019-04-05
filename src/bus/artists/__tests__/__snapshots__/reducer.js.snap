@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`artists reducer: should handle FILL_ARTISTS action 1`] = `
+Array [
+  Object {
+    "_id": "1",
+    "firstName": "Annie",
+    "lastName": "Walker",
+    "photo": "https://www.url.com",
+  },
+]
+`;
+
+exports[`artists reducer: should return initial state by default 1`] = `Array []`;

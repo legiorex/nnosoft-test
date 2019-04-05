@@ -7,11 +7,15 @@
                 "useBuiltIns": "entry",
                 "shippedProposals": true,
                 "spec": true,
-                "debug": false
+                "debug": false,
+                "targets": {
+                    "node": "current",
+                  },
             }
         ]
     ],
     "plugins": [
+        "syntax-async-functions",
         "@babel/plugin-transform-runtime",
         ["@babel/plugin-proposal-decorators", { "legacy": true }],
         "@babel/plugin-proposal-class-properties",

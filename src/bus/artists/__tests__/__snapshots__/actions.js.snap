@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` artists actions fetchArtists 1`] = `
+Object {
+  "type": "FETCH_ARTISTS_ASYNC",
+}
+`;
+
+exports[` artists actions fillArtists 1`] = `
+Object {
+  "payload": Array [
+    Object {
+      "_id": "1",
+      "firstName": "Annie",
+      "lastName": "Walker",
+      "photo": "https://www.url.com",
+    },
+  ],
+  "type": "FILL_ARTISTS",
+}
+`;

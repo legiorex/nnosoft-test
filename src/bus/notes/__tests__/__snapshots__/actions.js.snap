@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` notes actions addNote 1`] = `
+Object {
+  "payload": Object {
+    "indexNote": "0",
+    "text": "Hello!",
+  },
+  "type": "ADD_NOTE",
+}
+`;
+
+exports[` notes actions sendNotes 1`] = `
+Object {
+  "payload": Array [
+    "test",
+  ],
+  "type": "SEND_NOTES",
+}
+`;
+
+exports[` notes actions writeNotesLocal 1`] = `
+Object {
+  "type": "WRITE_NOTES_LOCAL",
+}
+`;
